@@ -2,6 +2,7 @@ import Animals.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
 //import java.util.Scanner;
 //Scanner scanner = new Scanner(System.in);
 
@@ -17,10 +18,6 @@ public class Main {
         System.out.println(cat1);
         System.out.println(cat2);
         System.out.println(dog1.getCount());
-
-
-
-        List<String> weeklyList = new ArrayList<>();
 
     }
 }
