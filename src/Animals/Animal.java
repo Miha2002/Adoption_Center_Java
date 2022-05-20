@@ -1,12 +1,14 @@
 package Animals;
 
-public class Animal implements Training{
+import Employees.Doctor;
+
+public abstract class Animal implements Training{
     int id;
     static int count = 0;
     String name;
     String sex; // f/m
     int age;
-    int weight;
+    float weight;
     Boolean trained;
 
     {
@@ -15,11 +17,13 @@ public class Animal implements Training{
 
     public Animal(){}
 
-    public Animal(String name, String sex, int age, int weight, Boolean trained) {
+    public Animal(String name, String sex, int age, float weight, Boolean trained) {
         this.name = name;
         this.sex = sex;
         this.age = age;
         this.weight = weight;
+        //for Cats / Dogs -> kilograms
+        //for the other animals -> grams
         this.trained = trained;
     }
 
@@ -31,7 +35,7 @@ public class Animal implements Training{
         this.id = id;
     }
 
-    public int getCount() {
+    public static int getCount() {
         return count;
     }
 
@@ -59,11 +63,11 @@ public class Animal implements Training{
         this.age = age;
     }
 
-    public int getWeight() {
+    public float getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 
@@ -75,10 +79,13 @@ public class Animal implements Training{
         this.trained = trained;
     }
 
-    public void Train(){
+    public void train(){
         if(!trained)
             trained = true;
         else
-            System.out.println("The animal was previously trained.\n");
+            System.out.println("The animal has been trained previously.\n");
     }
+
+    protected abstract void ageCategory();
+    protected abstract void diagnose(Doctor doc);
 }

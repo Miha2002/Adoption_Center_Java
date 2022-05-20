@@ -1,7 +1,10 @@
-package Service;
+package Services;
 
 import Animals.Cat;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CatService {
     ArrayList<Cat> cats;
@@ -10,18 +13,21 @@ public class CatService {
         cats = new ArrayList<>();
     }
 
-    public void addCat(Cat catToAdd) {
-        cats.add(catToAdd);
+    public void addCat(Cat cat) {
+        cats.add(cat);
     }
 
     public void deleteCat(Cat cat) {
         cats.remove(cat);
     }
 
+    public void showCats() {
+        System.out.println(Arrays.deepToString(cats.toArray()).replace("},", "},\n"));
+    }
+
     public void deleteCatById(int id) {
         cats.removeIf(catInArray -> catInArray.getId() == id);
     }
-
 
     public Cat getCatById(int id){
         for (Cat catInArray : cats) {

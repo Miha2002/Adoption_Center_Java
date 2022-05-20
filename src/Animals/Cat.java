@@ -1,5 +1,7 @@
 package Animals;
 
+import Employees.*;
+
 public class Cat extends Animal implements Adoptable{
     String fur_pattern;
     String fur_color;
@@ -13,7 +15,7 @@ public class Cat extends Animal implements Adoptable{
         id= 2000 + count_cat;
     }
 
-    public Cat(String name, String sex, int age, int weight,
+    public Cat(String name, String sex, int age, float weight,
                Boolean trained, String fur_pattern, String fur_color) {
         super(name, sex, age, weight, trained);
         this.fur_pattern = fur_pattern;
@@ -38,6 +40,10 @@ public class Cat extends Animal implements Adoptable{
         this.fur_color = fur_color;
     }
 
+    public static int getCount_cat() {
+        return count_cat;
+    }
+
     @Override
     public String toString() {
         return "Cat{" +
@@ -59,8 +65,42 @@ public class Cat extends Animal implements Adoptable{
         else
             System.out.println("I am "+name+", a "+age+" year(s) old "+ fur_color+" "+
                     fur_pattern+" cat and I'm looking for my forever home.");
-
     }
 
+    @Override
+    public void ageCategory(){
+        if(age == 0)
+            System.out.println(name+" is a junior.\n");
+        else if(age<15)
+            System.out.println(name+" is an adult.\n");
+        else
+            System.out.println(name+" is a senios.\n");
+    }
 
+    @Override
+    public void diagnose(Doctor doc) {
+        System.out.println("Doctor "+doc.getName()+" has examined the cat.\n");
+        if (age == 0) {
+            if (2 < (weight * 10) && (weight * 10) < 8) // between 200-800 grams
+                System.out.println("The kitten is healthy.");
+            else if ((weight * 10) > 8)
+                System.out.println("The kitten is obese.");
+            else
+                System.out.println("The kitten is malnourished.");
+        }
+        else {
+            if (sex.equals("f")) {
+                if (3.5 > weight && weight < 5.5)
+                    System.out.println("The cat is healthy weight.");
+                else
+                    System.out.println("The cat is an unhealthy weight.");
+            }
+            else {
+                if (5 > weight && weight < 7.5)
+                    System.out.println("The cat is healthy weight.");
+                else
+                    System.out.println("The cat is an unhealthy weight.");
+            }
+        }
+    }
 }

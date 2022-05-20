@@ -1,6 +1,4 @@
-package Items;
-
-import java.lang.reflect.Array;
+package Employees;
 
 public class Item {
     String name;
@@ -36,7 +34,4 @@ public class Item {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-
-
 }

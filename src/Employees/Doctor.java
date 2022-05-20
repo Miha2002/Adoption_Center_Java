@@ -14,4 +14,5 @@ public class Doctor extends Employee implements ChangeSalary{
     public void setSalary(int salary) {
         this.salary = salary;
     }
+
 }
