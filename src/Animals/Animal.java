@@ -1,11 +1,17 @@
 package Animals;
 
-public class Animal {
+public class Animal implements Training{
+    int id;
+    static int count = 0;
     String name;
     String sex; // f/m
     int age;
     int weight;
     Boolean trained;
+
+    {
+        count++;
+    }
 
     public Animal(){}
 
@@ -15,6 +21,26 @@ public class Animal {
         this.age = age;
         this.weight = weight;
         this.trained = trained;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSex() {
@@ -47,5 +73,12 @@ public class Animal {
 
     public void setTrained(Boolean trained) {
         this.trained = trained;
+    }
+
+    public void Train(){
+        if(!trained)
+            trained = true;
+        else
+            System.out.println("The animal was previously trained.\n");
     }
 }
