@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.Scanner;
 import java.io.IOException;
 
-public class CSVReader { //doesnt work
+public class CSVReader { //IT WORKS!!
 
     private static CSVReader csvr = null;
 
@@ -19,67 +19,55 @@ public class CSVReader { //doesnt work
     }
 
     private void cats(Service service) throws IOException {
-        File fileCats = new File("src/Files/csv/cats.csv");
+        File fileCats = new File("src/csv/cats");
         Scanner scanner = new Scanner(fileCats);
-
-//        scanner.useDelimiter(",");
-//        while(scanner.hasNext()) {
-//            service.cs.addCat(new Cat(
-//                    scanner.next(),
-//                    scanner.next(),
-//                    scanner.nextInt(),
-//                    scanner.nextFloat(),
-//                    scanner.nextBoolean(),
-//                    scanner.next(),
-//                    scanner.next()));
-//        }
-//        scanner.close();
 
         while(scanner.hasNext()) {
             String nextLine = scanner.nextLine();
             String[] arg = nextLine.split(",");
-            service.cs.addCat(new Cat(arg[1], arg[2],
-                    Integer.parseInt(arg[3]),
-                    Float.parseFloat(arg[4]),
-                    Boolean.parseBoolean(arg[5]),
-                    arg[6], arg[7]));
+
+            service.cs.addCat(new Cat(arg[0], arg[1],
+                    Integer.parseInt(arg[2]),
+                    Float.parseFloat(arg[3]),
+                    Boolean.parseBoolean(arg[4]),
+                    arg[5], arg[6]));
         }
     }
 
     private void dogs(Service service) throws IOException {
-        File fileDogs = new File("src/Files/csv/dogs.csv");
+        File fileDogs = new File("src/csv/dogs");
         Scanner scanner = new Scanner(fileDogs);
 
         while(scanner.hasNext()) {
             String nextLine = scanner.nextLine();
             String[] arg = nextLine.split(",");
-            service.ds.addDog(new Dog(arg[1], arg[2],
-                    Integer.parseInt(arg[3]),
-                    Float.parseFloat(arg[4]),
-                    Boolean.parseBoolean(arg[5]),
-                    arg[6],
-                    Integer.parseInt(arg[7])));
+            service.ds.addDog(new Dog(arg[0], arg[1],
+                    Integer.parseInt(arg[2]),
+                    Float.parseFloat(arg[3]),
+                    Boolean.parseBoolean(arg[4]),
+                    arg[5],
+                    Integer.parseInt(arg[6])));
         }
     }
 
     private void others(Service service) throws IOException {
-        File fileOthers = new File("src/Files/csv/others.csv");
+        File fileOthers = new File("src/csv/others");
         Scanner scanner = new Scanner(fileOthers);
 
         while(scanner.hasNext()) {
             String nextLine = scanner.nextLine();
             String[] arg = nextLine.split(",");
-            service.os.addOther(new Other(arg[1], arg[2],
-                    Integer.parseInt(arg[3]),
-                    Float.parseFloat(arg[4]),
-                    Boolean.parseBoolean(arg[5]),
-                    arg[6]));
+            service.os.addOther(new Other(arg[0], arg[1],
+                    Integer.parseInt(arg[2]),
+                    Float.parseFloat(arg[3]),
+                    Boolean.parseBoolean(arg[4]),
+                    arg[5]));
         }
     }
 
     public void reader(Service s) throws IOException {
         cats(s);
-//        dogs(s);
-//        others(s);
+        dogs(s);
+        others(s);
     }
 }

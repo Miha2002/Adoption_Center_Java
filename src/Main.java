@@ -2,8 +2,11 @@ import Animals.*;
 import Employees.*;
 import Services.*;
 import Files.CSVReader;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 
 public class Main {
@@ -18,7 +21,14 @@ public class Main {
             System.out.println("Error occurred!");
         }
 
-// -------------------------------------------------------------------
+        service.cs.showCats();
+        System.out.println("\n");
+        service.ds.showDogs();
+        System.out.println("\n");
+        service.os.showOthers();
+
+
+//  -------------------------------------------------------------------
 
 //        Cat cat1 = new Cat("Fluffy", "f", 10, 6, false, "tabby", "brown");
 //        Cat cat2 = new Cat();
@@ -30,7 +40,6 @@ public class Main {
 
 //        service.cs.addCat(cat1);
 //        service.cs.addCat(cat2);
-//        service.cs.showCats();
 //
 //        AnimalKeeper k1 = new AnimalKeeper("Anna", 20, "cat");
 //        Volunteer v1 = new Volunteer("Ted",2);

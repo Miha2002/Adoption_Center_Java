@@ -19,7 +19,7 @@ public class DogService {
         dogs.remove(dog);
     }
 
-    public static void showDogs() {
+    public void showDogs() {
         System.out.println(Arrays.deepToString(dogs.toArray()).replace("},", "},\n"));
     }
 

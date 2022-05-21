@@ -19,7 +19,7 @@ public class OtherService {
         others.remove(other);
     }
 
-    public static void showOthers() {
+    public void showOthers() {
         System.out.println(Arrays.deepToString(others.toArray()).replace("},", "},\n"));
     }
 
