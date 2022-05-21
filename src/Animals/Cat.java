@@ -79,6 +79,7 @@ public class Cat extends Animal implements Adoptable{
 
     @Override
     public void diagnose(Doctor doc) {
+        doc.addPatient(id);
         System.out.println("Doctor "+doc.getName()+" has examined the cat.\n");
         if (age == 0) {
             if (2 < (weight * 10) && (weight * 10) < 8) // between 200-800 grams

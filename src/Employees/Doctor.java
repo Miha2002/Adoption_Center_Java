@@ -1,7 +1,10 @@
 package Employees;
 
+import java.util.ArrayList;
+
 public class Doctor extends Employee implements ChangeSalary{
     int salary = 4000;
+    ArrayList<Integer> patients_today = new ArrayList <>();
 
     public Doctor(String name, int age) {
         super(name, age);
@@ -13,6 +16,32 @@ public class Doctor extends Employee implements ChangeSalary{
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public ArrayList<Integer> getPatients_today() {
+        return patients_today;
+    }
+
+    public void RaiseSalary(){
+        System.out.println(name+ "'s current salary is: "+salary+". How much is the raise? (percentage)\n");
+        float s = scanner.nextInt();
+        salary = Math.round(salary + salary * (s/100));
+        System.out.println("The new salary is: "+salary+".\n");
+    }
+
+    public void LowerSalary(){
+        System.out.println(name+"'s current salary is "+salary+". How much is the pay cut? (percentage)\n");
+        float s = scanner.nextInt();
+        salary = Math.round(salary + salary * (s/100));
+        System.out.println("The new salary is: "+salary+".\n");
+    }
+
+    public void showPatients(){
+        System.out.println(patients_today);
+    }
+
+    public void addPatient(int id) {
+        patients_today.add(id);
     }
 
 }

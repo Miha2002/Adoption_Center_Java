@@ -2,6 +2,7 @@ package Files;
 
 import Animals.*;
 import Services.Service;
+
 import java.io.File;
 import java.util.Scanner;
 import java.io.IOException;
@@ -25,7 +26,6 @@ public class CSVReader { //IT WORKS!!
         while(scanner.hasNext()) {
             String nextLine = scanner.nextLine();
             String[] arg = nextLine.split(",");
-
             service.cs.addCat(new Cat(arg[0], arg[1],
                     Integer.parseInt(arg[2]),
                     Float.parseFloat(arg[3]),

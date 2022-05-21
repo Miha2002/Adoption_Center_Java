@@ -27,6 +27,20 @@ public class AnimalKeeper extends Employee implements ChangeSalary,Work{
         this.assign_animal = assign_animal;
     }
 
+    public void RaiseSalary(){
+        System.out.println(name+ "'s current salary is: "+salary+". How much is the raise? (percentage)\n");
+        float s = scanner.nextInt();
+        salary = Math.round(salary + salary * (s/100));
+        System.out.println("The new salary is: "+salary+".\n");
+    }
+
+    public void LowerSalary(){
+        System.out.println(name+"'s current salary is "+salary+". How much is the pay cut? (percentage)\n");
+        float s = scanner.nextInt();
+        salary = Math.round(salary + salary * (s/100));
+        System.out.println("The new salary is: "+salary+".\n");
+    }
+
     public void clean(int id) {
         int x = id / 1000;
         int y = id % 1000;

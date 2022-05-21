@@ -1,5 +1,6 @@
 import Animals.*;
 import Employees.*;
+import Files.CSVWriter;
 import Services.*;
 import Files.CSVReader;
 
@@ -13,6 +14,8 @@ public class Main {
     public static void main(String[] args) {
 
         Service service = new Service();
+
+        //Reading data from a CSV file
         CSVReader csvr = CSVReader.getInstance();
         try {
             csvr.reader(service);
@@ -27,6 +30,11 @@ public class Main {
         System.out.println("\n");
         service.os.showOthers();
 
+        //Writing data in a CSV file
+        CSVWriter csvw = CSVWriter.getInstance();
+        Cat cat1 = new Cat("Fluff", "f", 10, 6, false, "tabby", "brown");
+
+        csvw.cat(cat1);
 
 //  -------------------------------------------------------------------
 
@@ -34,10 +42,10 @@ public class Main {
 //        Cat cat2 = new Cat();
 //        Dog dog1 = new Dog();
 //        Other hamster1 = new Other();
-
+//
 //        System.out.println(cat1);
 //        System.out.println(cat2);
-
+//
 //        service.cs.addCat(cat1);
 //        service.cs.addCat(cat2);
 //
@@ -47,6 +55,10 @@ public class Main {
 //        Item item1 = new Item("dog food", 20, 10);
 //        k1.buy(item1);
 //        v1.clean(2001);
+//
+//        Doctor doc = new Doctor("Addison", 20);
+//        doc.RaiseSalary();
+//        System.out.println(doc.getSalary());
 
     }
 }
