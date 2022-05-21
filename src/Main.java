@@ -1,14 +1,24 @@
 import Animals.*;
 import Employees.*;
 import Services.*;
+import Files.CSVReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-//import java.util.Scanner;
-//Scanner scanner = new Scanner(System.in);
 
 public class Main {
     public static void main(String[] args) {
 
+        Service service = new Service();
+//        CSVReader rcsv = CSVReader.getInstance();
+//        try {
+//            rcsv.reader(service);
+//        }
+//        catch(IOException e) {
+//            System.out.println("Error occurred!");
+//        }
 
+// -------------------------------------------------------------------
 
         Cat cat1 = new Cat("Fluffy", "f", 10, 6, false, "tabby", "brown");
         Cat cat2 = new Cat();
@@ -17,8 +27,6 @@ public class Main {
 
 //        System.out.println(cat1);
 //        System.out.println(cat2);
-
-        Service service = new Service();
 
         service.cs.addCat(cat1);
         service.cs.addCat(cat2);
