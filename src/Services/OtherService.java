@@ -15,10 +15,6 @@ public class OtherService {
         others.add(other);
     }
 
-    public void deleteOther(Other other) {
-        others.remove(other);
-    }
-
     public void showOthers() {
         System.out.println(Arrays.deepToString(others.toArray()).replace("},", "},\n"));
     }

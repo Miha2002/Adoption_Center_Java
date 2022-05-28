@@ -15,10 +15,6 @@ public class DogService {
         dogs.add(dog);
     }
 
-    public void deleteDog(Dog dog) {
-        dogs.remove(dog);
-    }
-
     public void showDogs() {
         System.out.println(Arrays.deepToString(dogs.toArray()).replace("},", "},\n"));
     }

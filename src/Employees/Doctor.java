@@ -6,8 +6,13 @@ public class Doctor extends Employee implements ChangeSalary{
     int salary = 4000;
     ArrayList<Integer> patients_today = new ArrayList <>();
 
+    public Doctor() {
+        id = 1000 + count;
+    }
+
     public Doctor(String name, int age) {
         super(name, age);
+        id = 1000 + count;
     }
 
     public int getSalary() {
@@ -44,4 +49,13 @@ public class Doctor extends Employee implements ChangeSalary{
         patients_today.add(id);
     }
 
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "salary=" + salary +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", id=" + id +
+                '}';
+    }
 }

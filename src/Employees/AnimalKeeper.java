@@ -6,9 +6,14 @@ public class AnimalKeeper extends Employee implements ChangeSalary,Work{
     int salary = 2500;
     String assign_animal; //the specific species that they take care of
 
+    public AnimalKeeper() {
+        id = 1000 + count;
+    }
+
     public AnimalKeeper(String name, int age, String assign_animal) {
         super(name, age);
         this.assign_animal = assign_animal;
+        id = 1000 + count;
     }
 
     public int getSalary() {
@@ -45,6 +50,7 @@ public class AnimalKeeper extends Employee implements ChangeSalary,Work{
         int x = id / 1000;
         int y = id % 1000;
 
+
         if (y!=0 && x == 1 && y <= Dog.getCount_dog())
             System.out.println("The dog with the ID " + id + " is clean.\n");
         else if (y!=0 && x == 2 && y<= Cat.getCount_cat())
@@ -60,4 +66,14 @@ public class AnimalKeeper extends Employee implements ChangeSalary,Work{
                 +x.getName()+" and the price is "+x.getQuantity()*x.getPrice()+".\n");
     }
 
+    @Override
+    public String toString() {
+        return "AnimalKeeper{" +
+                "salary=" + salary +
+                ", assign_animal='" + assign_animal + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", id=" + id +
+                '}';
+    }
 }

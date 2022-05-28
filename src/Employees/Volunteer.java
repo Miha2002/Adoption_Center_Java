@@ -4,8 +4,13 @@ import Animals.*;
 
 public class Volunteer extends Employee implements Work{
 
+    public Volunteer() {
+        id = 1000 + count;
+    }
+
     public Volunteer(String name, int age) {
         super(name, age);
+        id = 1000 + count;
     }
 
     public void clean(int id) {
@@ -21,5 +26,14 @@ public class Volunteer extends Employee implements Work{
     public void buy(Item x) {
         System.out.println("The worker will buy: "+x.getQuantity()+" of "+x.getName()
                 +" and the price is"+(x.getQuantity() * x.getPrice())+".\n");
+    }
+
+    @Override
+    public String toString() {
+        return "Volunteer{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", id=" + id +
+                '}';
     }
 }

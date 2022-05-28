@@ -2,7 +2,6 @@ package Services;
 
 import Animals.Cat;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -15,10 +14,6 @@ public class CatService {
 
     public void addCat(Cat cat) {
         cats.add(cat);
-    }
-
-    public void deleteCat(Cat cat) {
-        cats.remove(cat);
     }
 
     public void showCats() {

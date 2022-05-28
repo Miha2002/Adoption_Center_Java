@@ -15,7 +15,7 @@ public class CSVWriter {
     static FileWriter filew = null;
     static BufferedWriter buffw = null;
 
-    public CSVWriter() {}
+    private CSVWriter() {}
 
     public static CSVWriter getInstance() {
         if(csvw == null)
