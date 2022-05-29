@@ -3,7 +3,9 @@ package DB;
 import Animals.Cat;
 import Services.Service;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class CatDB {
     private static CatDB cdb = null;

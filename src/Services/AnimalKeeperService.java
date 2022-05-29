@@ -28,19 +28,30 @@ public class AnimalKeeperService {
         animalKeepers.removeIf(animalKeeperInArray -> animalKeeperInArray.getId() == id);
     }
 
-    public void wash(int id_emp, int id_anim){
+    public AnimalKeeper getAnimalKeeperById(int id) {
+        for (AnimalKeeper animalKeeperInArray : animalKeepers) {
+            if (animalKeeperInArray.getId() == id) {
+                return animalKeeperInArray;
+            }
+        }
+        return null;
+    }
+
+    public void wash(int id_emp, int id_anim) {
         if (getAnimalKeeperById(id_emp) != null)
             getAnimalKeeperById(id_emp).clean(id_anim);
         else
             System.out.println("Error: No animal keeper with this ID.\n");
     }
 
-    public AnimalKeeper getAnimalKeeperById(int id){
-        for (AnimalKeeper animalKeeperInArray : animalKeepers) {
-            if(animalKeeperInArray.getId() == id){
-                return animalKeeperInArray;
+    public void changeSalary(int id, int option) {
+        if (getAnimalKeeperById(id) != null)
+            switch (option) {
+                case 1 -> getAnimalKeeperById(id).RaiseSalary();
+                case 2 -> getAnimalKeeperById(id).LowerSalary();
             }
-        }
-        return null;
+        else
+            System.out.println("Error: No animal keeper with this ID.\n");
     }
+
 }

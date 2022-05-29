@@ -85,7 +85,7 @@ public class Other extends Animal implements Adoptable {
     @Override
     public void diagnose(Doctor doc) {
         doc.addPatient(id);
-        System.out.println("Doctor " + doc.getName() + " has examined the ");
+        System.out.println("\nDoctor " + doc.getName() + " has examined the ");
         if (species.equals("parrot")) {
             if (30 < weight && weight < 60)
                 System.out.println("parrot.\nThe parrot is a healthy weight.");

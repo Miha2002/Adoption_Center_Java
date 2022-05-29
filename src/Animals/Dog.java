@@ -82,7 +82,7 @@ public class Dog extends Animal implements Adoptable{
     @Override
     public void diagnose(Doctor doc) {
         doc.addPatient(id);
-        System.out.println("Doctor "+doc.getName()+" has examined the dog.\n");
+        System.out.println("\nDoctor "+doc.getName()+" has examined the dog.");
         if (age == 0) {
             if (2 < weight && weight < 8)
                 System.out.println("The puppy is healthy.");

@@ -40,32 +40,10 @@ public class Service {
 //    //Writing data in a CSV file
 //    CSVWriter csvw = CSVWriter.getInstance();
 
-
-    public void ConnectToDB() {
-        Service service = new Service();
-
-        DBConnection DBconn = DBConnection.getInstance();
-        CatDB cdb = CatDB.getInstance();
-        DogDB ddb = DogDB.getInstance();
-        OtherDB odb = OtherDB.getInstance();
-        AnimalKeeperDB akdb = AnimalKeeperDB.getInstance();
-        DoctorDB docdb = DoctorDB.getInstance();
-        VolunteerDB vdb = VolunteerDB.getInstance();
-        try {
-            DBconn.startConnection();
-            System.out.println("Database connection established!");
-
-            cdb.getCats(service);
-            ddb.getDogs(service);
-            odb.getOthers(service);
-            akdb.getAnimalKeepers(service);
-            docdb.getDoctors(service);
-            vdb.getVolunteers(service);
-
-        } catch (SQLException | ClassNotFoundException e) {
-            System.out.println("Error: Database connection failed!");
-        }
-    }
+    // Doesn't work
+//    public void ConnectToDB() {
+//        Service service = new Service();
+//    }
 
     public void start() {
         System.out.println("""
@@ -149,6 +127,8 @@ public class Service {
                 dog.setCategory(scanner.nextInt());
 
                 ds.addDog(dog);
+                DogDB ddb = DogDB.getInstance();
+                ddb.insertDog(dog);
                 goToDogs();
             }
             case 2 -> {
@@ -161,6 +141,8 @@ public class Service {
                 System.out.println("What's the dog's ID?\n");
                 x = scanner.nextInt();
                 ds.deleteDogById(x);
+                DogDB ddb = DogDB.getInstance();
+                ddb.deleteDogByName(ds.getDogById(x).getName());
                 goToDogs();
             }
             case 4 -> {
@@ -206,6 +188,9 @@ public class Service {
                 cat.setFur_color(scanner.next());
 
                 cs.addCat(cat);
+                CatDB cdb = CatDB.getInstance();
+                cdb.insertCat(cat);
+
                 goToCats();
             }
             case 2 -> {
@@ -218,6 +203,8 @@ public class Service {
                 System.out.println("What's the cat's ID?\n");
                 x = scanner.nextInt();
                 cs.deleteCatById(x);
+                CatDB cdb = CatDB.getInstance();
+                cdb.deleteCatByName(cs.getCatById(x).getName());
                 goToCats();
             }
             case 4 -> {
@@ -260,6 +247,8 @@ public class Service {
                 other.setSpecies(scanner.next());
 
                 os.addOther(other);
+                OtherDB odb = OtherDB.getInstance();
+                odb.insertOther(other);
                 goToOthers();
             }
             case 2 -> {
@@ -272,6 +261,8 @@ public class Service {
                 System.out.println("What's the animal's ID?\n");
                 x = scanner.nextInt();
                 os.deleteOtherById(x);
+                OtherDB odb = OtherDB.getInstance();
+                odb.deleteOtherByName(os.getOtherById(x).getName());
                 goToOthers();
             }
             case 4 -> {
@@ -293,8 +284,10 @@ public class Service {
                 2 - Delete an employee by name
                 3 - Find employee by name
                 4 - I want to see all employees
-                5 - Wash the animal
-                6 - Clean the animal's enclosure
+                5 - Change salary
+                6 - Wash an animal
+                7 - Clean an animal's enclosure
+                8 - See doctor
                 0 - BACK
                 """);
         int x = scanner.nextInt();
@@ -310,7 +303,8 @@ public class Service {
                 if (scanner.next() != null)
                     goToEmployees();
             }
-            case 5 -> {
+            case 5 -> changeSalary();
+            case 6 -> {
                 System.out.println("What's the employee's ID?");
                 int id_emp = scanner.nextInt();
                 System.out.println("How about the animal's ID?");
@@ -319,7 +313,7 @@ public class Service {
                 if (scanner.next() != null)
                     goToEmployees();
             }
-            case 6 -> {
+            case 7 -> {
                 System.out.println("What's the employee's ID?");
                 int id_emp = scanner.nextInt();
                 System.out.println("How about the animal's ID?");
@@ -328,6 +322,7 @@ public class Service {
                 if (scanner.next() != null)
                     goToEmployees();
             }
+            case 8 -> seeDoctor();
             case 0 -> start();
             default -> {
                 System.out.println("Error: Incorrect number. Try again!\n");
@@ -357,6 +352,9 @@ public class Service {
                 ak.setAssign_animal(scanner.next());
 
                 aks.addAnimalKeeper(ak);
+                AnimalKeeperDB akdb = AnimalKeeperDB.getInstance();
+                akdb.insertAnimalKeeper(ak);
+
                 goToEmployees();
             }
             case 2 -> {
@@ -368,6 +366,9 @@ public class Service {
                 d.setAge(scanner.nextInt());
 
                 docs.addDoctor(d);
+                DoctorDB docdb = DoctorDB.getInstance();
+                docdb.insertDoctor(d);
+
                 goToEmployees();
             }
             case 3 -> {
@@ -379,6 +380,8 @@ public class Service {
                 v.setAge(scanner.nextInt());
 
                 vs.addVolunteer(v);
+                VolunteerDB vdb = VolunteerDB.getInstance();
+                vdb.insertVolunteer(v);
                 goToEmployees();
             }
             case 4 -> goToEmployees();
@@ -402,16 +405,25 @@ public class Service {
             case 1 -> {
                 System.out.println("What's the employee's ID?");
                 aks.deleteAnimalKeeperById(scanner.nextInt());
+                AnimalKeeperDB akdb = AnimalKeeperDB.getInstance();
+                akdb.deleteAnimalKeeperByName(aks.getAnimalKeeperById(x).getName());
+
                 goToEmployees();
             }
             case 2 -> {
                 System.out.println("What's the employee's ID?");
                 docs.deleteDoctorById(scanner.nextInt());
+                DoctorDB docdb = DoctorDB.getInstance();
+                docdb.deleteDoctorByName(docs.getDoctorById(x).getName());
+
                 goToEmployees();
             }
             case 3 -> {
                 System.out.println("What's the employee's ID?");
                 vs.deleteVolunteerById(scanner.nextInt());
+                VolunteerDB vdb = VolunteerDB.getInstance();
+                vdb.deleteVolunteerByName(vs.getVolunteerById(x).getName());
+
                 goToEmployees();
             }
             case 4 -> goToEmployees();
@@ -435,17 +447,26 @@ public class Service {
             case 1 -> {
                 System.out.println("What's the employee's ID?");
                 System.out.println(aks.getAnimalKeeperById(scanner.nextInt()));
-                goToEmployees();
+
+                System.out.println("1 - to continue.\n");
+                if (scanner.next() != null)
+                    goToEmployees();
             }
             case 2 -> {
                 System.out.println("What's the employee's ID?");
                 System.out.println(docs.getDoctorById(scanner.nextInt()));
-                goToEmployees();
+
+                System.out.println("1 - to continue.\n");
+                if (scanner.next() != null)
+                    goToEmployees();
             }
             case 3 -> {
                 System.out.println("What's the employee's ID?");
                 System.out.println(vs.getVolunteerById(scanner.nextInt()));
-                goToEmployees();
+
+                System.out.println("1 - to continue.\n");
+                if (scanner.next() != null)
+                    goToEmployees();
             }
             case 4 -> goToEmployees();
             case 0 -> {
@@ -453,6 +474,96 @@ public class Service {
                 addEmployee();
             }
         }
+    }
+
+    private void changeSalary() {
+        System.out.println("""
+                        What's the employee's job?
+                        1 - Animal Keeper
+                        2 - Doctor
+                        0 - BACK
+                        """);
+        int x = scanner.nextInt();
+        switch (x) {
+            case 1 -> {
+                System.out.println("What's the employee's ID?\n");
+                int id = scanner.nextInt();
+                System.out.println("""
+                        Do you you want to raise or lower the salary?
+                        1 - raise
+                        2 - lower
+                        """);
+                aks.changeSalary(id, scanner.nextInt());
+
+                System.out.println("1 - to continue.\n");
+                if (scanner.next() != null)
+                    goToEmployees();
+            }
+            case 2 -> {
+                System.out.println("What's the employee's ID?\n");
+                int id = scanner.nextInt();
+                System.out.println("""
+                        Do you you want to raise or lower the salary?
+                        1 - raise
+                        2 - lower
+                        """);
+                docs.changeSalary(id, scanner.nextInt());
+
+                System.out.println("1 - to continue.\n");
+                if (scanner.next() != null)
+                    goToEmployees();
+            }
+            case 0 -> goToEmployees();
+            default -> {
+                System.out.println("Error: Incorrect number. Try again!\n");
+                changeSalary();
+            }
+        }
+    }
+
+    private void seeDoctor() {
+        System.out.println("""
+                What are you here to see the doctor for?
+                1 - Diagnose animal
+                2 - Today's patients
+                0 - BACK
+                """);
+        int x = scanner.nextInt();
+        switch (x) {
+            case 1 -> diagnoseAnimal();
+            case 2 -> {
+                System.out.println("What's the doctor's ID?");
+                docs.showTodayPatients(scanner.nextInt());
+
+                System.out.println("1 - to continue.\n");
+                if (scanner.next() != null)
+                    goToEmployees();
+            }
+            case 0 -> goToEmployees();
+            default -> {
+                System.out.println("Error: Incorrect number. Try again!\n");
+                seeDoctor();
+            }
+        }
+    }
+
+    private void diagnoseAnimal() {
+        System.out.println("What's the animal's ID?");
+        int id = scanner.nextInt();
+        System.out.println("What's the doctor's ID?");
+        int doc = scanner.nextInt();
+        if (docs.getDoctorById(doc) != null)
+            switch (id/1000) {
+                case 1 -> ds.getDogById(id).diagnose(docs.getDoctorById(doc));
+                case 2 -> cs.getCatById(id).diagnose(docs.getDoctorById(doc));
+                case 3 -> os.getOtherById(id).diagnose(docs.getDoctorById(doc));
+            }
+        else
+            System.out.println("Error: No doctor with this ID.");
+
+        System.out.println("1 - to continue.\n");
+        if (scanner.next() != null)
+            goToEmployees();
     }
 
 }

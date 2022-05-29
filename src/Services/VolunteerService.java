@@ -25,13 +25,6 @@ public class VolunteerService {
         vols.removeIf(volInArray -> volInArray.getId() == id);
     }
 
-    public void clean(int id_emp, int id_anim){
-        if(getVolunteerById(id_emp) != null)
-            getVolunteerById(id_emp).clean(id_anim);
-        else
-            System.out.println("Error: No volunteer with this ID.");
-    }
-
     public Volunteer getVolunteerById(int id){
         for (Volunteer volInArray : vols) {
             if(volInArray.getId() == id){
@@ -39,5 +32,12 @@ public class VolunteerService {
             }
         }
         return null;
+    }
+
+    public void clean(int id_emp, int id_anim){
+        if(getVolunteerById(id_emp) != null)
+            getVolunteerById(id_emp).clean(id_anim);
+        else
+            System.out.println("Error: No volunteer with this ID.");
     }
 }

@@ -33,4 +33,19 @@ public class DoctorService {
         }
         return null;
     }
+
+    public void showTodayPatients(int id) {
+        getDoctorById(id).showPatients();
+    }
+
+
+    public void changeSalary(int id, int option) {
+        if(getDoctorById(id) != null)
+            switch (option) {
+                case 1 -> getDoctorById(id).RaiseSalary();
+                case 2 -> getDoctorById(id).LowerSalary();
+            }
+        else
+            System.out.println("Error: No doctor with this ID.\n");
+    }
 }
