@@ -59,7 +59,7 @@ public class OtherDB {
         if(DBconn.getConn() != null) {
             try {
                 Statement st = DBconn.getConn().createStatement();
-                st.execute("DELETE FROM others WHERE Name=" + name + ";");
+                st.execute("DELETE FROM others WHERE name='" + name + "';");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -70,9 +70,14 @@ public class OtherDB {
         if(DBconn.getConn() != null) {
             try {
                 Statement st = DBconn.getConn().createStatement();
-                st.executeQuery("UPDATE others SET " +
-                        field + "=" + value +
-                        " WHERE Name=" + "\"" + name + "\"");
+                if (field.equals("name") || field.equals("sex") || field.equals("species"))
+                    st.executeUpdate("UPDATE others SET " +
+                            field + "='" + value + "'" +
+                            " WHERE name=" + "'" + name + "'");
+                else
+                    st.executeUpdate("UPDATE others SET " +
+                            field + "=" + value +
+                            " WHERE name=" + "'" + name + "'");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

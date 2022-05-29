@@ -61,7 +61,7 @@ public class DogDB {
         if(DBconn.getConn() != null) {
             try {
                 Statement st = DBconn.getConn().createStatement();
-                st.execute("DELETE FROM dogs WHERE Name=" + name + ";");
+                st.execute("DELETE FROM dogs WHERE name='" + name + "';");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -72,9 +72,14 @@ public class DogDB {
         if(DBconn.getConn() != null) {
             try {
                 Statement st = DBconn.getConn().createStatement();
-                st.executeQuery("UPDATE dogs SET " +
-                        field + "=" + value +
-                        " WHERE Name=" + "\"" + name + "\"");
+                if (field.equals("name") || field.equals("sex") || field.equals("breed"))
+                    st.executeUpdate("UPDATE dogs SET " +
+                            field + "='" + value + "'" +
+                            " WHERE name=" + "'" + name + "'");
+                else
+                    st.executeUpdate("UPDATE dogs SET " +
+                            field + "=" + value +
+                            " WHERE name=" + "'" + name + "'");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

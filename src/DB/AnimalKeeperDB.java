@@ -53,7 +53,7 @@ public class AnimalKeeperDB {
         if(DBconn.getConn() != null) {
             try {
                 Statement st = DBconn.getConn().createStatement();
-                st.execute("DELETE FROM animal_keepers WHERE Name=" + name + ";");
+                st.execute("DELETE FROM animal_keepers WHERE name='" + name + "';");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -64,9 +64,14 @@ public class AnimalKeeperDB {
         if(DBconn.getConn() != null) {
             try {
                 Statement st = DBconn.getConn().createStatement();
-                st.executeQuery("UPDATE animal_keepers SET " +
-                        field + "=" + value +
-                        " WHERE Name=" + "\"" + name + "\"");
+                if (field.equals("name") || field.equals("assign_animal"))
+                    st.executeUpdate("UPDATE animal_keepers SET " +
+                            field + "='" + value + "'" +
+                            " WHERE name=" + "'" + name + "'");
+                else
+                    st.executeUpdate("UPDATE animal_keepers SET " +
+                            field + "=" + value +
+                            " WHERE name=" + "'" + name + "'");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

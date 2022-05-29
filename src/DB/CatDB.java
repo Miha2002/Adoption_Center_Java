@@ -72,9 +72,14 @@ public class CatDB {
         if(DBconn.getConn() != null) {
             try {
                 Statement st = DBconn.getConn().createStatement();
-                st.execute("UPDATE cats SET " +
-                        field + "=" + value +
-                        " WHERE name='" + name + "'");
+                if (field.equals("name") || field.equals("sex") || field.equals("fur_pattern") || field.equals("fur_color"))
+                    st.executeUpdate("UPDATE cats SET " +
+                            field + "='" + value + "'" +
+                            " WHERE name=" + "'" + name + "'");
+                else
+                    st.executeUpdate("UPDATE cats SET " +
+                            field + "=" + value +
+                            " WHERE name=" + "'" + name + "'");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

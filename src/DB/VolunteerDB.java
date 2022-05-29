@@ -51,7 +51,7 @@ public class VolunteerDB {
         if(DBconn.getConn() != null) {
             try {
                 Statement st = DBconn.getConn().createStatement();
-                st.execute("DELETE FROM volunteers WHERE Name=" + name + ";");
+                st.execute("DELETE FROM volunteers WHERE name='" + name + "';");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -62,9 +62,14 @@ public class VolunteerDB {
         if(DBconn.getConn() != null) {
             try {
                 Statement st = DBconn.getConn().createStatement();
-                st.executeQuery("UPDATE volunteers SET " +
-                        field + "=" + value +
-                        " WHERE Name=" + "\"" + name + "\"");
+                if (field.equals("name"))
+                    st.executeUpdate("UPDATE volunteers SET " +
+                            field + "='" + value + "'" +
+                            " WHERE name=" + "'" + name + "'");
+                else
+                    st.executeUpdate("UPDATE volunteers SET " +
+                            field + "=" + value +
+                            " WHERE name=" + "'" + name + "'");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

@@ -99,6 +99,7 @@ public class Service {
                 2 - Find a dog using ID
                 3 - Delete a dog using ID
                 4 - Show all dogs
+                5 - Update data
                 0 - BACK
                 """);
         int x = scanner.nextInt();
@@ -133,20 +134,33 @@ public class Service {
             }
             case 2 -> {
                 System.out.println("What's the dog's ID?\n");
-                x = scanner.nextInt();
-                System.out.println(ds.getDogById(x) + "\n");
+                int id = scanner.nextInt();
+                System.out.println(ds.getDogById(id) + "\n");
                 goToDogs();
             }
             case 3 -> {
                 System.out.println("What's the dog's ID?\n");
-                x = scanner.nextInt();
-                ds.deleteDogById(x);
+                int id= scanner.nextInt();
+
                 DogDB ddb = DogDB.getInstance();
-                ddb.deleteDogByName(ds.getDogById(x).getName());
+                ddb.deleteDogByName(ds.getDogById(id).getName());
+                ds.deleteDogById(id);
                 goToDogs();
             }
             case 4 -> {
                 ds.showDogs();
+                goToDogs();
+            }
+            case 5 -> {
+                DogDB ddb = DogDB.getInstance();
+                System.out.println("Dog's name?");
+                String name = scanner.next();
+                System.out.println("Field: ");
+                String field = scanner.next();
+                System.out.println("Value: ");
+                String value = scanner.next();
+
+                ddb.updateDogDB(field, value, name); //it only changes in the db
                 goToDogs();
             }
             case 0 -> goToAnimals();
@@ -165,6 +179,7 @@ public class Service {
                 2 - Find a cat using ID
                 3 - Delete a cat using ID
                 4 - Show all cats
+                5 - Update data
                 0 - BACK
                 """);
         int x = scanner.nextInt();
@@ -195,20 +210,33 @@ public class Service {
             }
             case 2 -> {
                 System.out.println("What's the cat's ID?\n");
-                x = scanner.nextInt();
-                System.out.println(cs.getCatById(x) + "\n");
+                int id = scanner.nextInt();
+                System.out.println(cs.getCatById(id) + "\n");
                 goToCats();
             }
             case 3 -> {
                 System.out.println("What's the cat's ID?\n");
-                x = scanner.nextInt();
-                cs.deleteCatById(x);
+                int id = scanner.nextInt();
+
                 CatDB cdb = CatDB.getInstance();
-                cdb.deleteCatByName(cs.getCatById(x).getName());
+                cdb.deleteCatByName(cs.getCatById(id).getName());
+                cs.deleteCatById(id);
                 goToCats();
             }
             case 4 -> {
                 cs.showCats();
+                goToCats();
+            }
+            case 5 -> {
+                CatDB cdb = CatDB.getInstance();
+                System.out.println("Cat's name?");
+                String name = scanner.next();
+                System.out.println("Field: ");
+                String field = scanner.next();
+                System.out.println("Value: ");
+                String value = scanner.next();
+
+                cdb.updateCatDB(field, value, name); //it only changes in the db
                 goToCats();
             }
             case 0 -> goToAnimals();
@@ -226,6 +254,7 @@ public class Service {
                 2 - Find an animal using ID
                 3 - Delete an animal using ID
                 4 - Show all other animals
+                5 - Update data
                 0 - BACK
                 """);
         int x = scanner.nextInt();
@@ -253,20 +282,33 @@ public class Service {
             }
             case 2 -> {
                 System.out.println("What's the animal's ID?\n");
-                x = scanner.nextInt();
-                System.out.println(os.getOtherById(x) + "\n");
+                int id = scanner.nextInt();
+                System.out.println(os.getOtherById(id) + "\n");
                 goToOthers();
             }
             case 3 -> {
                 System.out.println("What's the animal's ID?\n");
-                x = scanner.nextInt();
-                os.deleteOtherById(x);
+                int id = scanner.nextInt();
+
                 OtherDB odb = OtherDB.getInstance();
-                odb.deleteOtherByName(os.getOtherById(x).getName());
+                odb.deleteOtherByName(os.getOtherById(id).getName());
+                os.deleteOtherById(id);
                 goToOthers();
             }
             case 4 -> {
                 os.showOthers();
+                goToOthers();
+            }
+            case 5 -> {
+                OtherDB odb = OtherDB.getInstance();
+                System.out.println("Animal's name?");
+                String name = scanner.next();
+                System.out.println("Field: ");
+                String field = scanner.next();
+                System.out.println("Value: ");
+                String value = scanner.next();
+
+                odb.updateOtherDB(field, value, name); //it only changes in the db
                 goToOthers();
             }
             case 0 -> goToAnimals();
@@ -284,10 +326,11 @@ public class Service {
                 2 - Delete an employee by name
                 3 - Find employee by name
                 4 - I want to see all employees
-                5 - Change salary
-                6 - Wash an animal
-                7 - Clean an animal's enclosure
-                8 - See doctor
+                5 - Update data
+                6 - Change salary
+                7 - Wash an animal
+                8 - Clean an animal's enclosure
+                9 - See doctor
                 0 - BACK
                 """);
         int x = scanner.nextInt();
@@ -303,8 +346,9 @@ public class Service {
                 if (scanner.next() != null)
                     goToEmployees();
             }
-            case 5 -> changeSalary();
-            case 6 -> {
+            case 5 -> updateEmployee();
+            case 6 -> changeSalary();
+            case 7 -> {
                 System.out.println("What's the employee's ID?");
                 int id_emp = scanner.nextInt();
                 System.out.println("How about the animal's ID?");
@@ -313,7 +357,7 @@ public class Service {
                 if (scanner.next() != null)
                     goToEmployees();
             }
-            case 7 -> {
+            case 8 -> {
                 System.out.println("What's the employee's ID?");
                 int id_emp = scanner.nextInt();
                 System.out.println("How about the animal's ID?");
@@ -322,7 +366,7 @@ public class Service {
                 if (scanner.next() != null)
                     goToEmployees();
             }
-            case 8 -> seeDoctor();
+            case 9 -> seeDoctor();
             case 0 -> start();
             default -> {
                 System.out.println("Error: Incorrect number. Try again!\n");
@@ -404,26 +448,29 @@ public class Service {
         switch (x) {
             case 1 -> {
                 System.out.println("What's the employee's ID?");
-                aks.deleteAnimalKeeperById(scanner.nextInt());
-                AnimalKeeperDB akdb = AnimalKeeperDB.getInstance();
-                akdb.deleteAnimalKeeperByName(aks.getAnimalKeeperById(x).getName());
+                int id = scanner.nextInt();
 
+                AnimalKeeperDB akdb = AnimalKeeperDB.getInstance();
+                akdb.deleteAnimalKeeperByName(aks.getAnimalKeeperById(id).getName());
+                aks.deleteAnimalKeeperById(id);
                 goToEmployees();
             }
             case 2 -> {
                 System.out.println("What's the employee's ID?");
-                docs.deleteDoctorById(scanner.nextInt());
-                DoctorDB docdb = DoctorDB.getInstance();
-                docdb.deleteDoctorByName(docs.getDoctorById(x).getName());
+                int id = scanner.nextInt();
 
+                DoctorDB docdb = DoctorDB.getInstance();
+                docdb.deleteDoctorByName(docs.getDoctorById(id).getName());
+                docs.deleteDoctorById(id);
                 goToEmployees();
             }
             case 3 -> {
                 System.out.println("What's the employee's ID?");
-                vs.deleteVolunteerById(scanner.nextInt());
-                VolunteerDB vdb = VolunteerDB.getInstance();
-                vdb.deleteVolunteerByName(vs.getVolunteerById(x).getName());
+                int id = scanner.nextInt();
 
+                VolunteerDB vdb = VolunteerDB.getInstance();
+                vdb.deleteVolunteerByName(vs.getVolunteerById(id).getName());
+                vs.deleteVolunteerById(id);
                 goToEmployees();
             }
             case 4 -> goToEmployees();
@@ -472,6 +519,55 @@ public class Service {
             case 0 -> {
                 System.out.println("Error: Incorrect number. Try again!\n");
                 addEmployee();
+            }
+        }
+    }
+
+    private void updateEmployee() {
+        System.out.println("""
+                        What's the employee's job?
+                        1 - Animal Keeper
+                        2 - Doctor
+                        3 - Volunteer
+                        0 - BACK
+                        """);
+        int x = scanner.nextInt();
+        switch(x) {
+            case 1 -> {
+                AnimalKeeperDB akdb = AnimalKeeperDB.getInstance();
+                System.out.println("Animal keeper's name?");
+                String name = scanner.next();
+                System.out.println("Field: ");
+                String field = scanner.next();
+                System.out.println("Value: ");
+                String value = scanner.next();
+
+                akdb.updateAnimalKeeperDB(field, value, name); //it only changes in the db
+                goToEmployees();
+            }
+            case 2 -> {
+                DoctorDB docdb = DoctorDB.getInstance();
+                System.out.println("Doctor's name?");
+                String name = scanner.next();
+                System.out.println("Field: ");
+                String field = scanner.next();
+                System.out.println("Value: ");
+                String value = scanner.next();
+
+                docdb.updateDoctorDB(field, value, name); //it only changes in the db
+                goToEmployees();
+            }
+            case 3 -> {
+                VolunteerDB vdb = VolunteerDB.getInstance();
+                System.out.println("Doctor's name?");
+                String name = scanner.next();
+                System.out.println("Field: ");
+                String field = scanner.next();
+                System.out.println("Value: ");
+                String value = scanner.next();
+
+                vdb.updateVolunteerDB(field, value, name); //it only changes in the db
+                goToEmployees();
             }
         }
     }
