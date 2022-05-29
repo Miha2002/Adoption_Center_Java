@@ -1,8 +1,13 @@
 package Services;
 
 import Animals.*;
+import DB.*;
 import Employees.*;
+import Files.CSVReader;
+import Files.CSVWriter;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Service {
@@ -19,6 +24,48 @@ public class Service {
 //        System.out.print("\033[H\033[2J");
 //        System.out.flush();
 //    }
+
+    public void ReadCSV() {
+        Service service = new Service();
+        //Reading data from a CSV file
+        CSVReader csvr = CSVReader.getInstance();
+        try {
+            csvr.reader(service);
+        }
+        catch(IOException e) {
+            System.out.println("Error occurred!");
+        }
+    }
+
+//    //Writing data in a CSV file
+//    CSVWriter csvw = CSVWriter.getInstance();
+
+
+    public void ConnectToDB() {
+        Service service = new Service();
+
+        DBConnection DBconn = DBConnection.getInstance();
+        CatDB cdb = CatDB.getInstance();
+        DogDB ddb = DogDB.getInstance();
+        OtherDB odb = OtherDB.getInstance();
+        AnimalKeeperDB akdb = AnimalKeeperDB.getInstance();
+        DoctorDB docdb = DoctorDB.getInstance();
+        VolunteerDB vdb = VolunteerDB.getInstance();
+        try {
+            DBconn.startConnection();
+            System.out.println("Database connection established!");
+
+            cdb.getCats(service);
+            ddb.getDogs(service);
+            odb.getOthers(service);
+            akdb.getAnimalKeepers(service);
+            docdb.getDoctors(service);
+            vdb.getVolunteers(service);
+
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println("Error: Database connection failed!");
+        }
+    }
 
     public void start() {
         System.out.println("""
