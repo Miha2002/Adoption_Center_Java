@@ -1,2 +1,2 @@
-# Project_Java_Animal_Adoption_Center
+# Java Project
 
